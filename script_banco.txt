@@ -1,0 +1,83 @@
+CREATE TABLE cliente (
+  codigo INTEGER(10) UNSIGNED NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  endereco VARCHAR(50) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  bairro VARCHAR(30) NOT NULL,
+  cidade VARCHAR(30) NOT NULL,
+  cep VARCHAR(8) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  fone VARCHAR(10) NOT NULL,
+  celular VARCHAR(10) NOT NULL,
+  cpf VARCHAR(11) NOT NULL,
+  obs VARCHAR(255) NOT NULL,
+  rg VARCHAR(20) NOT NULL,
+  orgaorg VARCHAR(10) NOT NULL,
+  nascimento DATE NOT NULL,
+  desde DATE NOT NULL,
+  cnpj VARCHAR(14) NOT NULL,
+  insest VARCHAR(20) NOT NULL,
+  sexo CHAR(1) NOT NULL,
+  profissao VARCHAR(20) NOT NULL,
+  empresa VARCHAR(50) NOT NULL,
+  foneemp VARCHAR(10) NOT NULL,
+  renda DOUBLE(9,2) NOT NULL,
+  referencia VARCHAR(50) NOT NULL,
+  foneref VARCHAR(10) NOT NULL,
+  PRIMARY KEY(codigo)
+);
+
+CREATE TABLE c_venda (
+  codigo INTEGER(11) NOT NULL,
+  cliente_codigo INTEGER(11) NOT NULL,
+  data_venda DATE NOT NULL,
+  PRIMARY KEY(codigo),
+  INDEX c_venda_FKIndex1(cliente_codigo)  
+);
+
+CREATE TABLE d_venda (
+  codigo INTEGER(11) NOT NULL,
+  c_venda_codigo INTEGER(11) NOT NULL,
+  produto_codigo VARCHAR(20) NOT NULL,
+  quantidade INTEGER(11) NOT NULL,
+  valor_unitario DOUBLE NOT NULL,
+  valor_total DOUBLE NOT NULL,
+  PRIMARY KEY(codigo),
+  INDEX d_venda_FKIndex1(c_venda_codigo),
+  INDEX d_venda_FKIndex2(produto_codigo)
+);
+
+CREATE TABLE fornecedor (
+  codigo INTEGER(10) UNSIGNED NOT NULL,
+  nome VARCHAR(100) NOT NULL,
+  endereco VARCHAR(50) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  bairro VARCHAR(30) NOT NULL,
+  cidade VARCHAR(30) NOT NULL,
+  cep VARCHAR(8) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  fone VARCHAR(10) NOT NULL,
+  celular VARCHAR(10) NOT NULL,
+  cpf VARCHAR(11) NOT NULL,
+  obs VARCHAR(255) NOT NULL,
+  rg VARCHAR(20) NOT NULL,
+  orgaorg VARCHAR(10) NOT NULL,
+  desde DATE NOT NULL,
+  cnpj VARCHAR(14) NOT NULL,
+  insest VARCHAR(20) NOT NULL,
+  fax VARCHAR(10) NOT NULL,
+  contato VARCHAR(20) NOT NULL,
+  PRIMARY KEY(codigo)
+);
+
+CREATE TABLE produto (
+  codigo VARCHAR(13) NOT NULL,
+  fornecedor_codigo INTEGER(10) UNSIGNED NOT NULL,
+  descricao VARCHAR(50) NOT NULL,
+  vlrcompra DOUBLE(9,2) NOT NULL,
+  vlrvenda DOUBLE(9,2) NOT NULL,
+  estoque INTEGER(10) UNSIGNED NOT NULL,
+  critico INTEGER(10) UNSIGNED NOT NULL,
+  PRIMARY KEY(codigo),
+  INDEX produto_FKIndex1(fornecedor_codigo)
+);
